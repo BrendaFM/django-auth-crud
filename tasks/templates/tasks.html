@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container">
+    <h1 class="mt-4 mb-4 text-center">{{ title }} </h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Lista de tareas pendientes</h3>
+        </div>
+        
+        <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 7%">#</th>
+                    <th style="width: 25%">Tarea</th>
+                    <th style="width: 40%">Descripción</th>
+                    <th style="width: 15%">Usuario</th>
+                    <th style="width: 13%">Ver más</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td class="nro">
+                        <script>
+                            var nro = document.querySelectorAll(".nro");
+                            nro.forEach(function(celda, indice) {celda.textContent = indice + 1;});
+                        </script>
+                    </td>
+                    <td>
+                        {% if task.important %}
+                            <strong>{{task.title}}</strong>
+                        {% else %}
+                            {{task.title}}
+                        {% endif %}
+                    </td>
+                    <td>{{task.description}} <br> {{task.datecompleted|date:'M j Y:i'}}</td>
+                    <td>{{task.user.username}}</td>
+                    <td><a href="{% url 'task_detail' task.id %}"><i class="fas fa-search-plus" style="color: gray;"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    
+</main>
+
+{% endblock %}
+

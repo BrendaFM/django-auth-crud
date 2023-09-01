@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<main class="container" style="margin-top: 8em">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-outline card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Inicio de Sesión</h3>
+                </div>
+                <form class="form-horizontal" action="/signin/" method="POST">
+                    {%csrf_token%}
+                    <div class="card-body">
+                        {% if error %}
+                        <div class="callout callout-warning mt-1 mb-4">
+                            <i class="icon fas fa-exclamation-triangle" style="color:#d39e00"></i>&nbsp &nbsp {{error}}
+                        </div>
+                        {% endif %}
+                        <div class="form-group row mt-1">
+                            <label for="id_username" class="col-sm-3 col-form-label">Usuario</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="username" class="form-control" id="id_username">
+                            </div>    
+                        </div>
+                        <div class="form-group row mt-1">
+                            <label for="id_password" class="col-sm-3 col-form-label">Contraseña</label>
+                            <div class="col-sm-9">
+                                <input type="password" name="password" class="form-control" id="id_password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn bg-gradient-primary">Sign in</button>
+                        <button type="submit" class="btn bg-gradient-secondary btn-default float-right">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{%endblock%}
